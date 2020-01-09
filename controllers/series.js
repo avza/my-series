@@ -6,11 +6,6 @@ const index = (req, res) => {
     })
 }
 const newSerie = (req, res) => {
-    const serie = new Serie({
-        name: 'Van Helsing',
-        status: 'watching'
-    })
-    serie.save(() => console.log('saved'))
     res.render('series/new')
 }
 
