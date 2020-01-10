@@ -1,11 +1,9 @@
-const Serie = require('../models/series')
-
-const index = (req, res) => {
+const index = ({ Serie }, req, res) => {
     Serie.find({}, (err, docs) => {
         res.render('series/index', { series: docs })
     })
 }
-const newSerie = (req, res) => {
+const newSerie = ({ Serie }, req, res) => {
     res.render('series/new')
 }
 
