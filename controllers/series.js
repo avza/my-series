@@ -42,7 +42,15 @@ const editForm = async ({ Serie }, req, res) => {
     const serie = await Serie.findOne({ _id: req.params.id })
     res.render('series/edit', { serie, labels, errors: [] })
 }
+const info = async ({ Serie }, req, res) => {
+    const serie = await Serie.findOne({ _id: req.params.id })
+    res.render('series/info', { serie })
+}
+const addComment = async ({ Serie }, req, res) => {
+    await Serie.updateOne({ _id: req.params.id }, { $push: { comments: req.body.comment } })
+    res.redirect('/series/info/'+req.params.id)
+}
 
 module.exports = {
-    index, newSerie, newForm, deleteOne, editForm, editSerie
+    index, newSerie, newForm, deleteOne, editForm, editSerie, info, addComment
 }
