@@ -10,8 +10,14 @@ const index = async ({ Serie }, req, res) => {
 }
 const newSerie = async ({ Serie }, req, res) => {
     const serie = new Serie(req.body)
-    await serie.save()
-    res.redirect('/series')
+    try {
+        await serie.save()
+        res.redirect('/series')
+    } catch (e) {
+        res.render('series/new', {
+            errors: Object.keys(e.errors)
+        })
+    }
 }
 const newForm = (req, res) => {
     res.render('series/new')
@@ -24,8 +30,13 @@ const editSerie = async ({ Serie }, req, res) => {
     const serie = await Serie.findOne({ _id: req.params.id })
     serie.name = req.body.name
     serie.status = req.body.status
-    await serie.save()
-    res.redirect('/series')
+
+    try {
+        await serie.save()
+        res.redirect('/series')
+    } catch (e) {
+        res.render('series/edit', { serie, labels, errors: Object.keys(e.errors) })
+    }
 }
 const editForm = async ({ Serie }, req, res) => {
     const serie = await Serie.findOne({ _id: req.params.id })
