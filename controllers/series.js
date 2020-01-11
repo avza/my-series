@@ -20,7 +20,7 @@ const newSerie = async ({ Serie }, req, res) => {
     }
 }
 const newForm = (req, res) => {
-    res.render('series/new')
+    res.render('series/new', { errors: [] })
 }
 const deleteOne = async ({ Serie }, req, res) => {
     await Serie.remove({ _id: req.params.id })
@@ -40,7 +40,7 @@ const editSerie = async ({ Serie }, req, res) => {
 }
 const editForm = async ({ Serie }, req, res) => {
     const serie = await Serie.findOne({ _id: req.params.id })
-    res.render('series/edit', { serie, labels })
+    res.render('series/edit', { serie, labels, errors: [] })
 }
 
 module.exports = {
