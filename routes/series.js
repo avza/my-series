@@ -9,6 +9,14 @@ const models = {
 }
 
 router.get('/', seriesController.index.bind(null, models))
-router.get('/new', seriesController.newSerie.bind(null, models))
+
+router.get('/new', seriesController.newForm)
+router.post('/new', seriesController.newSerie.bind(null, models))
+
+router.get('/delete/:id', seriesController.deleteOne.bind(null, models))
+
+router.get('/update/:id', seriesController.editForm.bind(null, models))
+router.post('/update/:id', seriesController.editSerie.bind(null, models))
+
 
 module.exports = router
